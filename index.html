@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+#canvas {
+    position:fixed;
+    margin: 0;
+    height: 50%;
+    width: 50%;
+}
+.holder { 
+    padding: 50px;
+    background-color: gray;
+
+}
+</style>
+<body class="holder">
+    <canvas id="canvas"></canvas>
+    
+</body>
+<script>
+
+let ctx = canvas.getContext('2d');
+let pos = { x: 0, y: 0 };
+
+document.addEventListener('mousemove', draw);
+document.addEventListener('mousedown', setPosition);
+document.addEventListener('mouseenter', setPosition);
+
+
+function setPosition(e) {
+  pos.x = e.clientX;
+  pos.y = e.clientY;
+}
+
+function draw(e) {
+  if (e.buttons !== 1) return;
+
+  ctx.beginPath(); 
+
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#c0392b';
+
+  ctx.moveTo(pos.x, pos.y);
+  setPosition(e);
+  ctx.lineTo(pos.x, pos.y); 
+
+  ctx.stroke(); 
+}
+</script>
+</html>
