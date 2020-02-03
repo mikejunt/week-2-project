@@ -68,3 +68,9 @@
   span {
     margin-right: 5px;
   }
+#swatch {
+  height: 80px;
+  width: 80px;
+  margin-left: 60px;
+  border: 2px solid black;
+}
