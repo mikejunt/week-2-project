@@ -80,6 +80,7 @@
   document.getElementById("colormaker").addEventListener("click", function () {
     const makecolor = [];
     Object.assign(makecolor, customcolor);
+    drawcolor = makecolor;
     let nextcircle = document.createElement("div");
     let circleholder = document.getElementById("colorpicker");
     circleholder.appendChild(nextcircle);
