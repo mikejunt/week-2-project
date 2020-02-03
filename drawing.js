@@ -59,28 +59,28 @@
   let greenfeedback = document.getElementById("greenvalue");
   let bluefeedback = document.getElementById("bluevalue");
   let swatch = document.getElementById("swatch");
-  // swatch.style.backgroundColor(`rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`);
+  swatch.style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`;
   
 
   redfeedback.innerHTML = redslider.value;
   redslider.oninput = function () {
     redfeedback.innerHTML = this.value;
     customcolor[0] = this.value;
-    // swatch.style.backgroundColor(`rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`);
+    swatch.style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`;
   }
 
   greenfeedback.innerHTML = greenslider.value;
   greenslider.oninput = function () {
     greenfeedback.innerHTML = this.value;
     customcolor[1] = this.value;
-    // swatch.style.backgroundColor(`rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`);
+    swatch.style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`;
   }
 
   bluefeedback.innerHTML = blueslider.value;
   blueslider.oninput = function () {
     bluefeedback.innerHTML = this.value;
     customcolor[2] = this.value;
-    // swatch.style.backgroundColor(`rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`);
+    swatch.style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`;
   }
 
   document.getElementById("colormaker").addEventListener("click", function () {
