@@ -73,11 +73,14 @@
       <div class="options"></div>
       <div class="options"></div>
     </div>
-    <div class="m-0" id="sliderholder"><div class="slidecontainer">
-      <input type="range" min="0" max="255" value="77" class="slider" id="customred">
-      <input type="range" min="0" max="255" value="20" class="slider" id="customgreen">
-      <input type="range" min="0" max="255" value="140" class="slider" id="customblue">
-    </div>Red:<span id="redvalue"></span>Green:<span id="greenvalue"></span>Blue:<span id="bluevalue"></span></div>
+    <div class="m-0" id="sliderholder">
+      <div class="slidecontainer">
+        <input type="range" min="0" max="255" value="77" class="slider" id="customred">
+        <input type="range" min="0" max="255" value="20" class="slider" id="customgreen">
+        <input type="range" min="0" max="255" value="140" class="slider" id="customblue">
+      </div>Red:<span id="redvalue"></span>Green:<span id="greenvalue"></span>Blue:<span id="bluevalue"></span>
+      <div><button id="colormaker">MAKE COLOR</button><button id="reset">WIPE</button></div>
+    </div>
   </main>
 
 </body>
@@ -134,32 +137,48 @@
     }
   })()
 
-let redslider = document.getElementById("customred");
-let greenslider = document.getElementById("customgreen");
-let blueslider = document.getElementById("customblue");
-customcolor = [77,20,140]
-let redfeedback = document.getElementById("redvalue");
-let greenfeedback = document.getElementById("greenvalue");
-let bluefeedback = document.getElementById("bluevalue");
+  let redslider = document.getElementById("customred");
+  let greenslider = document.getElementById("customgreen");
+  let blueslider = document.getElementById("customblue");
+  customcolor = [77, 20, 140]
+  let redfeedback = document.getElementById("redvalue");
+  let greenfeedback = document.getElementById("greenvalue");
+  let bluefeedback = document.getElementById("bluevalue");
 
-redfeedback.innerHTML = redslider.value;
-redslider.oninput = function() {
-  redfeedback.innerHTML = this.value;
-  customcolor[0] = this.value;
-}
+  redfeedback.innerHTML = redslider.value;
+  redslider.oninput = function () {
+    redfeedback.innerHTML = this.value;
+    customcolor[0] = this.value;
+  }
 
-greenfeedback.innerHTML = greenslider.value;
-greenslider.oninput = function() {
-  greenfeedback.innerHTML = this.value;
-  customcolor[1] = this.value;
-}
+  greenfeedback.innerHTML = greenslider.value;
+  greenslider.oninput = function () {
+    greenfeedback.innerHTML = this.value;
+    customcolor[1] = this.value;
+  }
 
-bluefeedback.innerHTML = blueslider.value;
-blueslider.oninput = function() {
-  bluefeedback.innerHTML = this.value;
-  customcolor[2] = this.value;
-}
-
+  bluefeedback.innerHTML = blueslider.value;
+  blueslider.oninput = function () {
+    bluefeedback.innerHTML = this.value;
+    customcolor[2] = this.value;
+  }
+  
+  const makecolor = [];
+  document.getElementById("colormaker").addEventListener("click", function () {
+    Object.assign(makecolor, customcolor);
+    console.log(`makecolor is ${makecolor}`)
+    let nextcircle = document.createElement("div");
+    let circleholder = document.getElementById("colorpicker");
+    circleholder.appendChild(nextcircle);
+    console.log("added div")
+    nextcircle.classList.add("options");
+    console.log("added class")
+    nextcircle.style.backgroundColor = `rgb(${makecolor[0]},${makecolor[1]},${makecolor[2]})`
+    console.log("set background color")
+    nextcircle.addEventListener("click",function() {
+      drawcolor = makecolor;
+    })
+  })
 
   resize();
 </script>
