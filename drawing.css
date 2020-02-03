@@ -1,0 +1,70 @@
+
+  #canvas {
+    background-color: white;
+  }
+
+  body {
+    background-color: burlywood;
+  }
+
+  main {
+    padding-left: 15px;
+    height: calc(100vh - 50px);
+  }
+
+  #holder {
+    width: calc(100vw - 130px);
+    height: calc(100vh - 200px);
+  }
+
+  header {
+    height: 50px;
+    line-height: 50px;
+    font-size: 35px;
+  }
+
+  #colorpicker {
+    width: 94px;
+    height: calc(100vh - 200px);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  #sliderholder {
+    width: 250px;
+    height: 140px;
+  }
+
+  .m-0 {
+    margin: 0 !important;
+  }
+
+  .options {
+    border-radius: 50%;
+    border: 2px solid black;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 20px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .slidecontainer {
+    height: 40px;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+
+  #buttonholder {
+    height: 80px;
+    position: relative;
+    /* top: -80px; */
+  }
+
+  span {
+    margin-right: 5px;
+  }

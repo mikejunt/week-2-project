@@ -5,78 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Draw Stuff</title>
+  <link rel="stylesheet" type="text/css" href="drawing.css">
 </head>
-<style>
-  #canvas {
-    background-color: white;
-  }
 
-  body {
-    background-color: burlywood;
-  }
-
-  main {
-    padding-left: 15px;
-    height: calc(100vh - 50px);
-  }
-
-  #holder {
-    width: calc(100vw - 130px);
-    height: calc(100vh - 200px);
-  }
-
-  header {
-    height: 50px;
-    line-height: 50px;
-    font-size: 35px;
-  }
-
-  #colorpicker {
-    width: 94px;
-    height: calc(100vh - 200px);
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  #sliderholder {
-    width: 250px;
-    height: 140px;
-  }
-
-  .m-0 {
-    margin: 0 !important;
-  }
-
-  .options {
-    border-radius: 50%;
-    border: 2px solid black;
-    height: 50px;
-    width: 50px;
-    margin-bottom: 20px;
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  .slidecontainer {
-    height: 40px;
-  }
-
-  .inline-block {
-    display: inline-block;
-  }
-  #buttonholder {
-    height: 80px;
-    position: relative;
-    /* top: -80px; */
-  }
-
-  span {
-    margin-right: 5px;
-  }
-</style>
 
 <body class="m-0">
   <header class="m-0 text-center">Drawing App that Draws</header>
@@ -91,120 +23,24 @@
     </div>
     <div class="m-0 inline-block" id="sliderholder">
       <div class="slidecontainer">
-        <input type="range" min="0" max="255" value="77" class="slider" id="customred"><span id="redvalue"></span>Red</div>
-      <div class="slidecontainer">
-        <input type="range" min="0" max="255" value="20" class="slider" id="customgreen"><span id="greenvalue"></span>Green
+        <input type="range" min="0" max="255" value="77" class="slider" id="customred"><span id="redvalue"></span>Red
       </div>
       <div class="slidecontainer">
-        <input type="range" min="0" max="255" value="140" class="slider" id="customblue"><span id="bluevalue"></span>Blue
+        <input type="range" min="0" max="255" value="20" class="slider" id="customgreen"><span
+          id="greenvalue"></span>Green
+      </div>
+      <div class="slidecontainer">
+        <input type="range" min="0" max="255" value="140" class="slider" id="customblue"><span
+          id="bluevalue"></span>Blue
       </div>
     </div>
-      <div id="buttonholder" class="inline-block"><p><button id="colormaker">MAKE COLOR</button></p><button id="reset">WIPE</button></div>
+    <div id="buttonholder" class="inline-block">
+      <p><button id="colormaker">MAKE COLOR</button></p><button id="reset">WIPE</button>
+    </div>
 
   </main>
 
 </body>
-<script>
-  let canvas = document.getElementById("canvas");
-  let ctx = canvas.getContext('2d');
-  let pos = { x: 0, y: 0 };
-  let drawcolor = [0, 0, 0];
-  let customcolor = []
-
-  window.addEventListener('resize', resize);
-  document.addEventListener('mousemove', draw);
-  document.addEventListener('mousedown', setPosition);
-  document.addEventListener('mouseenter', setPosition);
-
-  function setPosition(e) {
-    pos.x = e.clientX - 15;
-    pos.y = e.clientY - 50;
-  }
-
-  function resize() {
-    let holder = document.getElementById("holder");
-    ctx.canvas.width = holder.clientWidth;
-    ctx.canvas.height = holder.clientHeight;
-  }
-
-  function draw(e) {
-    if (e.buttons !== 1) return;
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = `rgb( ${drawcolor[0]},${drawcolor[1]},${drawcolor[2]})`;
-    ctx.moveTo(pos.x, pos.y);
-    setPosition(e);
-    ctx.lineTo(pos.x, pos.y);
-    ctx.stroke();
-  }
-
-  (function () {
-    let white = [255, 255, 255];
-    let black = [0, 0, 0];
-    customcolor = [];
-    let startcolors = document.getElementsByClassName("options");
-
-    for (let i = 0; i < 3; i++) {
-      customcolor = Object.assign(customcolor, black);
-      customcolor[i] = white[i];
-      startcolors[i].style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`
-      const mycolor = [];
-      Object.assign(mycolor, customcolor);
-      startcolors[i].addEventListener("click", function () {
-        drawcolor = mycolor;
-      })
-    }
-  })()
-
-  let redslider = document.getElementById("customred");
-  let greenslider = document.getElementById("customgreen");
-  let blueslider = document.getElementById("customblue");
-  customcolor = [77, 20, 140]
-  let redfeedback = document.getElementById("redvalue");
-  let greenfeedback = document.getElementById("greenvalue");
-  let bluefeedback = document.getElementById("bluevalue");
-
-  redfeedback.innerHTML = redslider.value;
-  redslider.oninput = function () {
-    redfeedback.innerHTML = this.value;
-    customcolor[0] = this.value;
-  }
-
-  greenfeedback.innerHTML = greenslider.value;
-  greenslider.oninput = function () {
-    greenfeedback.innerHTML = this.value;
-    customcolor[1] = this.value;
-  }
-
-  bluefeedback.innerHTML = blueslider.value;
-  blueslider.oninput = function () {
-    bluefeedback.innerHTML = this.value;
-    customcolor[2] = this.value;
-  }
-
-
-  const makecolor = [];
-  document.getElementById("colormaker").addEventListener("click", function () {
-    Object.assign(makecolor, customcolor);
-    console.log(`makecolor is ${makecolor}`)
-    let nextcircle = document.createElement("div");
-    let circleholder = document.getElementById("colorpicker");
-    circleholder.appendChild(nextcircle);
-    console.log("added div")
-    nextcircle.classList.add("options");
-    console.log("added class")
-    nextcircle.style.backgroundColor = `rgb(${makecolor[0]},${makecolor[1]},${makecolor[2]})`
-    console.log("set background color")
-    nextcircle.addEventListener("click", function () {
-      drawcolor = makecolor;
-    })
-  })
-
-  document.getElementById("reset").addEventListener("click", function () { resize() })
-
-
-  resize();
-</script>
+<script src="drawing.js"></script>
 
 </html>
