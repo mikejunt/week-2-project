@@ -1,57 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 <style>
-#canvas {
-    position:fixed;
-    margin: 0;
-    height: 50%;
-    width: 50%;
-}
-.holder { 
-    padding: 50px;
-    background-color: gray;
+  #canvas {
+    background-color: white;
+  }
 
-}
+  body {
+    background-color: gray;
+  }
+
+  main {
+    background-color: coral;
+    padding-left: 15px;
+    height: calc(100vh - 50px);
+  }
+
+  #holder {
+    background-color: burlywood;
+    width: calc(100vw - 130px);
+    height: calc(100vh - 200px);
+    display: inline-block;
+  }
+
+  header {
+    height: 50px;
+    background-color: chartreuse;
+  }
+
+  #colorpicker {
+    width: 94px;
+    height: calc(100vh - 200px);
+    background-color: cornflowerblue;
+    display: inline-block;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  #sliderholder {
+    width: calc(100% - 17px);
+    height: 140px;
+    background-color: darkblue;
+  }
+  .m-0 {
+    margin: 0 !important;
+  }
+  .options {
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: yellow;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 20px;
+  }
 </style>
-<body class="holder">
-    <canvas id="canvas"></canvas>
-    
+
+<body class="m-0">
+  <header class="m-0">Drawing App that Draws</header>
+  <main class="m-0">
+    <div class="m-0" id="holder">
+      <canvas id="canvas"></canvas>
+    </div>
+    <div class="m-0" id="colorpicker"><div class="options"></div><div class="options"></div><div class="options"></div></div>
+    <div class="m-0" id="sliderholder"></div>
+  </main>
+
 </body>
 <script>
+  let canvas = document.getElementById("canvas");
+  let ctx = canvas.getContext('2d');
+  let pos = { x: 0, y: 0 };
 
-let ctx = canvas.getContext('2d');
-let pos = { x: 0, y: 0 };
+  window.addEventListener('resize', resize);
+  document.addEventListener('mousemove', draw);
+  document.addEventListener('mousedown', setPosition);
+  document.addEventListener('mouseenter', setPosition);
 
-document.addEventListener('mousemove', draw);
-document.addEventListener('mousedown', setPosition);
-document.addEventListener('mouseenter', setPosition);
+  function setPosition(e) {
+    pos.x = e.clientX - 15;
+    pos.y = e.clientY - 50;
+  }
 
+  function resize() {
+    let holder = document.getElementById("holder");
+    ctx.canvas.width = holder.clientWidth;
+    ctx.canvas.height = holder.clientHeight;
+  }
 
-function setPosition(e) {
-  pos.x = e.clientX;
-  pos.y = e.clientY;
-}
+  function draw(e) {
+    if (e.buttons !== 1) return;
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = 'red';
+    ctx.moveTo(pos.x, pos.y);
+    setPosition(e);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+  }
 
-function draw(e) {
-  if (e.buttons !== 1) return;
-
-  ctx.beginPath(); 
-
-  ctx.lineWidth = 5;
-  ctx.lineCap = 'round';
-  ctx.strokeStyle = '#c0392b';
-
-  ctx.moveTo(pos.x, pos.y);
-  setPosition(e);
-  ctx.lineTo(pos.x, pos.y); 
-
-  ctx.stroke(); 
-}
+  resize();
 </script>
+
 </html>
