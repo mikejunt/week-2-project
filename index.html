@@ -13,40 +13,35 @@
   }
 
   body {
-    background-color: gray;
+    background-color: burlywood;
   }
 
   main {
-    background-color: coral;
     padding-left: 15px;
     height: calc(100vh - 50px);
   }
 
   #holder {
-    background-color: burlywood;
     width: calc(100vw - 130px);
     height: calc(100vh - 200px);
-    display: inline-block;
   }
 
   header {
     height: 50px;
-    background-color: chartreuse;
+    line-height: 50px;
+    font-size: 35px;
   }
 
   #colorpicker {
     width: 94px;
     height: calc(100vh - 200px);
-    background-color: cornflowerblue;
-    display: inline-block;
     padding: 20px;
     box-sizing: border-box;
   }
 
   #sliderholder {
-    width: calc(100% - 17px);
+    width: 250px;
     height: 140px;
-    background-color: darkblue;
   }
 
   .m-0 {
@@ -60,27 +55,52 @@
     width: 50px;
     margin-bottom: 20px;
   }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .slidecontainer {
+    height: 40px;
+  }
+
+  .inline-block {
+    display: inline-block;
+  }
+  #buttonholder {
+    height: 80px;
+    position: relative;
+    /* top: -80px; */
+  }
+
+  span {
+    margin-right: 5px;
+  }
 </style>
 
 <body class="m-0">
-  <header class="m-0">Drawing App that Draws</header>
+  <header class="m-0 text-center">Drawing App that Draws</header>
   <main class="m-0">
-    <div class="m-0" id="holder">
+    <div class="m-0 inline-block" id="holder">
       <canvas id="canvas"></canvas>
     </div>
-    <div class="m-0" id="colorpicker">
+    <div class="m-0 inline-block" id="colorpicker">
       <div class="options"></div>
       <div class="options"></div>
       <div class="options"></div>
     </div>
-    <div class="m-0" id="sliderholder">
+    <div class="m-0 inline-block" id="sliderholder">
       <div class="slidecontainer">
-        <input type="range" min="0" max="255" value="77" class="slider" id="customred">
-        <input type="range" min="0" max="255" value="20" class="slider" id="customgreen">
-        <input type="range" min="0" max="255" value="140" class="slider" id="customblue">
-      </div>Red:<span id="redvalue"></span>Green:<span id="greenvalue"></span>Blue:<span id="bluevalue"></span>
-      <div><button id="colormaker">MAKE COLOR</button><button id="reset">WIPE</button></div>
+        <input type="range" min="0" max="255" value="77" class="slider" id="customred"><span id="redvalue"></span>Red</div>
+      <div class="slidecontainer">
+        <input type="range" min="0" max="255" value="20" class="slider" id="customgreen"><span id="greenvalue"></span>Green
+      </div>
+      <div class="slidecontainer">
+        <input type="range" min="0" max="255" value="140" class="slider" id="customblue"><span id="bluevalue"></span>Blue
+      </div>
     </div>
+      <div id="buttonholder" class="inline-block"><p><button id="colormaker">MAKE COLOR</button></p><button id="reset">WIPE</button></div>
+
   </main>
 
 </body>
@@ -181,7 +201,7 @@
     })
   })
 
-  document.getElementById("reset").addEventListener("click", function() {resize()})
+  document.getElementById("reset").addEventListener("click", function () { resize() })
 
 
   resize();
