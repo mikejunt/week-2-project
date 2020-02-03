@@ -48,13 +48,14 @@
     height: 140px;
     background-color: darkblue;
   }
+
   .m-0 {
     margin: 0 !important;
   }
+
   .options {
     border-radius: 50%;
     border: 2px solid black;
-    background-color: yellow;
     height: 50px;
     width: 50px;
     margin-bottom: 20px;
@@ -67,8 +68,16 @@
     <div class="m-0" id="holder">
       <canvas id="canvas"></canvas>
     </div>
-    <div class="m-0" id="colorpicker"><div class="options"></div><div class="options"></div><div class="options"></div></div>
-    <div class="m-0" id="sliderholder"></div>
+    <div class="m-0" id="colorpicker">
+      <div class="options"></div>
+      <div class="options"></div>
+      <div class="options"></div>
+    </div>
+    <div class="m-0" id="sliderholder"><div class="slidecontainer">
+      <input type="range" min="0" max="255" value="77" class="slider" id="customred">
+      <input type="range" min="0" max="255" value="20" class="slider" id="customgreen">
+      <input type="range" min="0" max="255" value="140" class="slider" id="customblue">
+    </div>Red:<span id="redvalue"></span>Green:<span id="greenvalue"></span>Blue:<span id="bluevalue"></span></div>
   </main>
 
 </body>
@@ -76,6 +85,8 @@
   let canvas = document.getElementById("canvas");
   let ctx = canvas.getContext('2d');
   let pos = { x: 0, y: 0 };
+  let drawcolor = [0, 0, 0];
+  let customcolor = []
 
   window.addEventListener('resize', resize);
   document.addEventListener('mousemove', draw);
@@ -98,12 +109,57 @@
     ctx.beginPath();
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
-    ctx.strokeStyle = 'red';
+    ctx.strokeStyle = `rgb( ${drawcolor[0]},${drawcolor[1]},${drawcolor[2]})`;
     ctx.moveTo(pos.x, pos.y);
     setPosition(e);
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
   }
+
+  (function () {
+    let white = [255, 255, 255];
+    let black = [0, 0, 0];
+    customcolor = [];
+    let startcolors = document.getElementsByClassName("options");
+
+    for (let i = 0; i < 3; i++) {
+      customcolor = Object.assign(customcolor, black);
+      customcolor[i] = white[i];
+      startcolors[i].style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`
+      const mycolor = [];
+      Object.assign(mycolor, customcolor);
+      startcolors[i].addEventListener("click", function () {
+        drawcolor = mycolor;
+      })
+    }
+  })()
+
+let redslider = document.getElementById("customred");
+let greenslider = document.getElementById("customgreen");
+let blueslider = document.getElementById("customblue");
+customcolor = [77,20,140]
+let redfeedback = document.getElementById("redvalue");
+let greenfeedback = document.getElementById("greenvalue");
+let bluefeedback = document.getElementById("bluevalue");
+
+redfeedback.innerHTML = redslider.value;
+redslider.oninput = function() {
+  redfeedback.innerHTML = this.value;
+  customcolor[0] = this.value;
+}
+
+greenfeedback.innerHTML = greenslider.value;
+greenslider.oninput = function() {
+  greenfeedback.innerHTML = this.value;
+  customcolor[1] = this.value;
+}
+
+bluefeedback.innerHTML = blueslider.value;
+blueslider.oninput = function() {
+  bluefeedback.innerHTML = this.value;
+  customcolor[2] = this.value;
+}
+
 
   resize();
 </script>
