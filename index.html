@@ -162,7 +162,8 @@
     bluefeedback.innerHTML = this.value;
     customcolor[2] = this.value;
   }
-  
+
+
   const makecolor = [];
   document.getElementById("colormaker").addEventListener("click", function () {
     Object.assign(makecolor, customcolor);
@@ -175,10 +176,13 @@
     console.log("added class")
     nextcircle.style.backgroundColor = `rgb(${makecolor[0]},${makecolor[1]},${makecolor[2]})`
     console.log("set background color")
-    nextcircle.addEventListener("click",function() {
+    nextcircle.addEventListener("click", function () {
       drawcolor = makecolor;
     })
   })
+
+  document.getElementById("reset").addEventListener("click", function() {resize()})
+
 
   resize();
 </script>
