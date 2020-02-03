@@ -3,8 +3,7 @@
   let ctx = canvas.getContext('2d');
   let pos = { x: 0, y: 0 };
   let drawcolor = [0, 0, 0];
-  let customcolor = []
-  const makecolor = [];
+  let customcolor = [];
 
   window.addEventListener('resize', resize);
   document.addEventListener('mousemove', draw);
@@ -78,9 +77,8 @@
     customcolor[2] = this.value;
   }
 
-
-
   document.getElementById("colormaker").addEventListener("click", function () {
+    const makecolor = [];
     Object.assign(makecolor, customcolor);
     let nextcircle = document.createElement("div");
     let circleholder = document.getElementById("colorpicker");
