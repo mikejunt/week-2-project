@@ -2,8 +2,9 @@
   let canvas = document.getElementById("canvas");
   let ctx = canvas.getContext('2d');
   let pos = { x: 0, y: 0 };
-  let drawcolor = [0, 0, 0];
+  let drawcolor = [255, 0, 0];
   let customcolor = [];
+  let lastcircle = document.querySelector(".options");
 
   window.addEventListener('resize', resize);
   document.addEventListener('mousemove', draw);
@@ -46,9 +47,13 @@
       const mycolor = [];
       Object.assign(mycolor, customcolor);
       startcolors[i].addEventListener("click", function () {
+        lastcircle.classList.remove("selected");
         drawcolor = mycolor;
+        this.classList.add("selected");
+        lastcircle = this;
       })
     }
+    document.querySelector(".options").classList.add("selected");
   })()
 
   let redslider = document.getElementById("customred");
@@ -87,13 +92,18 @@
     const makecolor = [];
     Object.assign(makecolor, customcolor);
     drawcolor = makecolor;
+    lastcircle.classList.remove("selected");
     let nextcircle = document.createElement("div");
     let circleholder = document.getElementById("colorpicker");
     circleholder.appendChild(nextcircle);
-    nextcircle.classList.add("options");
-    nextcircle.style.backgroundColor = `rgb(${makecolor[0]},${makecolor[1]},${makecolor[2]})`
+    nextcircle.classList.add("options", "selected");
+    nextcircle.style.backgroundColor = `rgb(${makecolor[0]},${makecolor[1]},${makecolor[2]})`;
+    lastcircle = nextcircle;
     nextcircle.addEventListener("click", function () {
+      lastcircle.classList.remove("selected");
       drawcolor = makecolor;
+      this.classList.add("selected");
+      lastcircle = this;
     })
   })
 
