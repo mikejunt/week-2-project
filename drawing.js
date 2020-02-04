@@ -5,6 +5,7 @@
   let drawcolor = [255, 0, 0];
   let customcolor = [];
   let lastcircle = document.querySelector(".options");
+  let stroke = 5;
 
   window.addEventListener('resize', resize);
   document.addEventListener('mousemove', draw);
@@ -25,7 +26,7 @@
   function draw(e) {
     if (e.buttons !== 1) return;
     ctx.beginPath();
-    ctx.lineWidth = 5;
+    ctx.lineWidth = stroke;
     ctx.lineCap = 'round';
     ctx.strokeStyle = `rgb( ${drawcolor[0]},${drawcolor[1]},${drawcolor[2]})`;
     ctx.moveTo(pos.x, pos.y);
@@ -64,9 +65,11 @@
   let greenfeedback = document.getElementById("greenvalue");
   let bluefeedback = document.getElementById("bluevalue");
   let swatch = document.getElementById("swatch");
+  let brush = document.getElementById("brush");
+  let brushdisplay = document.getElementById("brushdisplay");
+
   swatch.style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`;
   
-
   redfeedback.innerHTML = redslider.value;
   redslider.oninput = function () {
     redfeedback.innerHTML = this.value;
@@ -86,6 +89,12 @@
     bluefeedback.innerHTML = this.value;
     customcolor[2] = this.value;
     swatch.style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`;
+  }
+
+  brush.oninput = function () {
+    brushdisplay.style.height = `${brush.value}px`;
+    brushdisplay.style.width = `${brush.value}px`;
+    stroke = this.value;
   }
 
   document.getElementById("colormaker").addEventListener("click", function () {
