@@ -6,6 +6,15 @@
   let customcolor = [];
   let lastcircle = document.querySelector(".options");
   let stroke = 5;
+  let redslider = document.getElementById("customred");
+  let greenslider = document.getElementById("customgreen");
+  let blueslider = document.getElementById("customblue");
+  let redfeedback = document.getElementById("redvalue");
+  let greenfeedback = document.getElementById("greenvalue");
+  let bluefeedback = document.getElementById("bluevalue");
+  let swatch = document.getElementById("swatch");
+  let brush = document.getElementById("brush");
+  let brushdisplay = document.getElementById("brushdisplay");
 
   window.addEventListener('resize', resize);
   document.addEventListener('mousemove', draw);
@@ -55,18 +64,8 @@
       })
     }
     document.querySelector(".options").classList.add("selected");
+    customcolor = [77, 20, 140]
   })()
-
-  let redslider = document.getElementById("customred");
-  let greenslider = document.getElementById("customgreen");
-  let blueslider = document.getElementById("customblue");
-  customcolor = [77, 20, 140]
-  let redfeedback = document.getElementById("redvalue");
-  let greenfeedback = document.getElementById("greenvalue");
-  let bluefeedback = document.getElementById("bluevalue");
-  let swatch = document.getElementById("swatch");
-  let brush = document.getElementById("brush");
-  let brushdisplay = document.getElementById("brushdisplay");
 
   swatch.style.backgroundColor = `rgb(${customcolor[0]},${customcolor[1]},${customcolor[2]})`;
   
